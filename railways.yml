@@ -1,0 +1,34 @@
+# Railway YAML Configuration
+
+# This defines the environment where your app runs
+app:
+  name: n8n-custom-node
+  type: docker
+
+# Define the Dockerfile to build the image
+build:
+  docker:
+    dockerfile: ./Dockerfile  # Make sure this path is correct, relative to the YAML file
+
+# Define which environment variables you need, if any
+env:
+  - N8N_VERSION: 0.195.0   # For example, specify n8n version (adjust to your need)
+  - NODE_ENV: production
+  - PORT: 5678             # Default n8n port, adjust if you use something else
+
+# Optional - Define build and start commands (for custom cases)
+commands:
+  build: "docker build -t custom-node ."
+  start: "docker run -p 5678:5678 custom-node"
+
+# Optional - Define which services are available
+services:
+  - type: node
+    name: n8n-node
+    version: "latest"  # Update with your node version if needed
+
+# Optional - Define deployment details if you need additional control
+deploy:
+  region: us-west
+  instance_type: small
+  auto_deploy: true
