@@ -1,0 +1,11 @@
+FROM n8nio/n8n
+
+# Copy your custom nodes
+COPY ./n8n-nodes-audiotranscribe /home/node/.n8n/custom/nodes/n8n-nodes-audiotranscribe
+
+# Optional: Set working directory
+WORKDIR /home/node
+
+# Expose port and start n8n
+EXPOSE 5678
+CMD ["n8n"]
